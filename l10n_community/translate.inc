@@ -1235,7 +1235,7 @@ function l10n_community_string_details($sid = 0, $ajax = 0) {
       'SELECT value, context FROM {l10n_server_string} WHERE sid = :sid',
       array(':sid' => $sid)
     )->fetchObject();
-    $unpacked = l10n_community_unpack_string($string->value);
+    $unpacked = !empty($string) ? l10n_community_unpack_string($string->value) : array();
     $output .= '<h3>' . t('Source string') . '</h3>' . theme('item_list', array('items' => $unpacked));
     $output .= '<h3>' . (empty($string->context) ? t('Used at the following places') : t('Used at the following places in context %context', array('%context' => $string->context))) . '</h3>';
   }
